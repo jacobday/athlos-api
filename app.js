@@ -12,7 +12,7 @@ const aliveTime = 1000 * 60 * 30
 
 
 //Load Configurations
-dotenv.config({path:'./config/config.env'})
+dotenv.config({ path: ".env" });
 
 //Passport Configuration
 require('./config/passport')(passport)
