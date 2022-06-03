@@ -1,42 +1,40 @@
 const { default: axios } = require('axios');
 const express = require('express');
 const router = express.Router();
-const url = process.env.chat_api_url
-const chat_headers={
-    'Content-Type': 'application/json',
-    appid: process.env.appId,
-    apikey: process.env.apiKey,
-}
+const url = process.env.CHAT_API_URL;
+const chat_headers = {
+  "Content-Type": "application/json",
+  appid: process.env.APPID,
+  apikey: process.env.APIKEY,
+};
 
+router.get("/auth", (req, res) => {
+  const uid = req.query.uid;
+  // if you have your own login method, call it here.
+  // then call CometChat for auth token
+  requestAuthToken(uid)
+    .then((token) => {
+      console.log("Success:" + JSON.stringify(token));
+      res.json(token);
+    })
+    .catch((error) => console.error("Error:", error));
+});
 
-router.get('/auth', (req, res) => {
-    const uid = req.query.uid;
-    // if you have your own login method, call it here.
-    // then call CometChat for auth token
-    requestAuthToken(uid)
-      .then(token => {
-        console.log('Success:' + JSON.stringify(token));
-        res.json(token);
-      })
-      .catch(error => console.error('Error:', error));
-  });
-
-
-  router.get('/users', (req, res) => {
-    axios
-      .get(url+`/users`, {
-        headers,
-      })
-      .then(response => {
-        const { data } = response.data;
-        const filterAgentData = data.filter(data => {
+router.get("/users", (req, res) => {
+  axios
+    .get(url + `/users`, {
+      headers,
+    })
+    .then((response) => {
+      const { data } = response.data;
+      const filterAgentData = data.filter((data) => {
         // filter agent out from the list of users
-          return data.uid !== agentUID;
-        });
-        res.json(filterAgentData);
-      })
-      .catch(error => console.error('Error:', error));
-  });
+        return data.uid !== AGENTUID;
+      });
+      res.json(filterAgentData);
+    })
+    .catch((error) => console.error("Error:", error));
+});
 
 router.get('/create',(req,res)=>{
 
