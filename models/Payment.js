@@ -14,8 +14,6 @@ const PaymentSchema = mongoose.Schema({
     country: { type: String, required: true },
     zipcode: { type: Number, required: true },
   },
-  promotionCodeUsed: { type: String },
-  rewardPointsUsed: { type: String },
 });
 
 const Payment = mongoose.model("Payment", PaymentSchema, "payment_methods");

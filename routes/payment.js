@@ -76,8 +76,6 @@ router.put("/update/:id", async (req, res) => {
         country: req.body.billingLocation.country,
         zipcode: req.body.billingLocation.zipcode,
       },
-      promotionUsed: req.body.promotionUsed || "No Promotion Used",
-      rewardPointsUsed: req.body.rewardPointsUsed,
     })
       .then((response) => {
         console.log(response);
