@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const FacilitySchema = mongoose.Schema({
   facilityId: { type: String, required: true },
   facilityName: { type: String, required: true },
