@@ -9,7 +9,7 @@ router.post("/add", async function (req, res) {
   var paymentObject = {
     userEmail: req.body.userEmail,
     cardHolderName: req.body.cardHolderName,
-    cardNumber: req.body.cardNumber,
+    cardNumber: await bcrypt.hash(req.body.cardNumber, salt),
     cvv: await bcrypt.hash(req.body.cvv, salt),
     cardExpiry: req.body.cardExpiry,
     billingLocation: {
