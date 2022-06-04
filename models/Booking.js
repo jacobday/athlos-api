@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const BookingSchema = mongoose.Schema({
-  facilityID:{type:String,required:true},
+  facilityID: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
@@ -21,7 +21,7 @@ const BookingSchema = mongoose.Schema({
     min: 0,
     max: 23,
   },
-  totalAmount: {type: Number, required: true}
+  totalAmount: { type: Number, required: true },
 });
 
 const Booking = mongoose.model("bookings", BookingSchema);
