@@ -1,41 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Athlos API</title>
-</head>
-<body>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,700&family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap");
-    header {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 10px;
-      margin: 0 auto;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Athlos API</title>
+  </head>
+  <body>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,700&family=Nunito:wght@300;700&display=swap");
 
-    header .title {
-      font-family: 'Noto Serif', serif;
-      font-size: 50px;
-      font-weight: 400;
-    }
+      :root {
+        --font-body: "Nunito", sans-serif;
+        --font-title: "Noto Serif", serif;
+        --color-primary: rgb(41, 176, 176);
+        --color-primary-dark: #219292;
+        --color-primary-tint: #caefef;
+        --color-secondary: #ddcecd;
+        --color-tertiary: #eff2f1;
+        --color-gray: rgb(79, 90, 107);
+        --default-border-radius: 5px;
+      }
 
-    header .desc {
-      color: rgb(40, 175, 176);
-      font-family: Nunito, sans-serif;
-      font-size: 35px;
-      font-weight: 300;
-      line-height: 1.5;
-    }
-  </style>
+      body {
+        font-family: var(--font-body);
+      }
 
-  <header>
-    <div class="title">ATHLOS</div>
-    <div class="desc">API</div>
-  </header>
-</body>
+      header {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 10px;
+        margin: 0 auto;
+      }
+
+      header .title {
+        font-family: var(--font-title);
+        font-size: 50px;
+        font-weight: 400;
+      }
+
+      header .desc {
+        color: var(--color-primary);
+        font-size: 35px;
+        font-weight: 300;
+        line-height: 1.5;
+      }
+
+      section {
+        padding-top: 2em;
+        display: flex;
+        justify-content: center;
+      }
+
+      .navigation {
+        font-family: var(--font-body);
+        font-size: 14px;
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        padding: 0.7em 1.2em;
+        background-color: var(--color-primary);
+        box-shadow: 0 3px 5px rgba(41, 41, 41, 0.3);
+        border: 1px solid var(--color-gray);
+        border-radius: var(--default-border-radius);
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+      }
+
+      .navigation:hover {
+        background-color: var(--color-primary-dark);
+      }
+    </style>
+
+    <header>
+      <div class="title">ATHLOS</div>
+      <div class="desc">API</div>
+    </header>
+
+    <section>
+      <button
+        onclick="window.location.href='https://athlos.herokuapp.com'"
+        class="navigation"
+      >
+        Navigate to Frontend
+      </button>
+    </section>
+  </body>
 </html>
