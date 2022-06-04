@@ -21,9 +21,9 @@ connectDB();
 const app = express();
 
 var origin = "https://athlos.herokuapp.com";
-if(process.env.NODE_ENV === "development"){
-    app.use(morgan('dev'))
-    origin = "http://localhost:3001"   
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+  origin = "http://localhost:3001";
 }
 
 console.log(origin);
@@ -50,7 +50,6 @@ app.use(cookieParser());
 //Passport Middle-ware
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 app.use(bodyParser.json());
 //Routes
