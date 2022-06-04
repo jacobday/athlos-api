@@ -10,10 +10,10 @@ var cors = require("cors");
 const middleware = require("./middleware");
 const aliveTime = 1000 * 60 * 30;
 
-//Load Configurations
+// Load Configurations
 dotenv.config({ path: ".env" });
 
-//Passport Configuration
+// Passport Configuration
 require("./config/passport")(passport);
 
 connectDB();
@@ -25,12 +25,12 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
   origin = "http://localhost:3001";
 }
-
 console.log(origin);
+
 app.use(cors({ credentials: true, origin: true }));
 app.set("trust proxy", 1);
 
-//Session Middleware
+// Session Middleware
 app.use(
   session({
     key: "session_id",
@@ -45,25 +45,17 @@ app.use(
     },
   })
 );
-
-// set up rate limiter: maximum of 20 requests per minute
-var RateLimit = require('express-rate-limit');
-var limiter = RateLimit({
-  windowMs: 1*60*1000, // 1 minute
-  max: 20
-});
-// apply rate limiter to all requests
-app.use(limiter);
-
 app.use(cookieParser());
 
-//Passport Middle-ware
+// Rate Limit Middleware
+app.use(middleware.limiter);
+
+// Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(bodyParser.json());
 
-//Routes
+// Routes
 app.use("/", require("./routes/index"));
 app.use("/auth", require("./routes/auth"));
 app.use("/users", require("./routes/users"));
