@@ -45,6 +45,16 @@ app.use(
     },
   })
 );
+
+// set up rate limiter: maximum of 20 requests per minute
+var RateLimit = require('express-rate-limit');
+var limiter = RateLimit({
+  windowMs: 1*60*1000, // 1 minute
+  max: 20
+});
+// apply rate limiter to all requests
+app.use(limiter);
+
 app.use(cookieParser());
 
 //Passport Middle-ware
@@ -52,6 +62,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(bodyParser.json());
+
 //Routes
 app.use("/", require("./routes/index"));
 app.use("/auth", require("./routes/auth"));
