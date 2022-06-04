@@ -28,6 +28,7 @@ if (process.env.NODE_ENV === "development") {
 console.log(origin);
 app.use(cors({ credentials: true, origin: true }));
 app.set("trust proxy", 1);
+
 //Session Middleware
 app.use(
   session({
@@ -48,10 +49,7 @@ app.use(cookieParser());
 //Passport Middle-ware
 app.use(passport.initialize());
 app.use(passport.session());
-// app.get("/api", function(req,res){
-//     console.log('Get Request');
-//     res.send({name: 'harsha'});
-// });
+
 
 app.use(bodyParser.json());
 //Routes

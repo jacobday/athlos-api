@@ -20,6 +20,7 @@ router.post("/add", async function (req, res) {
   let city = "";
   let state = "";
   let country = "";
+
   if (address.length == 4) {
     street = address[0];
     city = address[1];
@@ -31,6 +32,7 @@ router.post("/add", async function (req, res) {
     state = address[3];
     country = address[4];
   }
+
   var manualFacility = {
     facilityId: new mongoose.Types.ObjectId().toString(),
     facilityName: req.body.newFacilityData.facilityName,
@@ -48,7 +50,6 @@ router.post("/add", async function (req, res) {
     latitude: req.body.newFacilityData.latitude,
     longitude: req.body.newFacilityData.longitude,
   };
-  //console.log(manualFacility)
   try {
     let facility = await Facility.findOne({
       "facilityLocation.place_id": manualFacility.facilityLocation.place_id,

@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const { default: mongoose } = require("mongoose");
 
 router.get("/", (req, res) => {
-  // console.log('Inside Get')
   res.send("<h1>Hello from the API!</h1>");
 });
 

@@ -18,22 +18,17 @@ router.post("/add", async function (req, res) {
     profileType: "Manual",
     userType: "Customer",
   };
-  //console.log(manualUser)
   try {
-    //console.log(manualUser.email)
     let user = await User.findOne({ email: manualUser.email }).exec(
       async (err, user) => {
         if (err) {
           console.log(err);
-          //console.log('Inside IF')
-          //googleUser =GoogleUser.create(googleUser).exec()
         } else {
           if (user) {
-            //console.log('Found User')
             res.status(409).send("Not Adding to Database, Already Exists");
           } else {
-            //console.log('User Not Found',res)
             manualUser = await User.create(manualUser);
+
             res.status(200).send("Registered User Data");
           }
         }
@@ -46,7 +41,6 @@ router.post("/add", async function (req, res) {
 
 router.post("/login", async function (req, res) {
   try {
-    //console.log(req.body.loginData.email)
     let user = await User.findOne({ email: req.body.loginData.email }).exec(
       async (err, user) => {
         if (err) {
@@ -56,13 +50,10 @@ router.post("/login", async function (req, res) {
             console.log("Found User\n");
 
             //Check Hashed Passwords
-            //console.log(user.password)
-            //console.log(req.body.loginData.password)
             const validPassword = await bcrypt.compare(
               req.body.loginData.password,
               user.password
             );
-            //console.log(validPassword)
             if (validPassword) {
               let token = jwt.sign(
                 { email: user.email },
@@ -73,10 +64,6 @@ router.post("/login", async function (req, res) {
               res
                 .cookie("access_token", token, {
                   httpOnly: true,
-                  // secure:
-                  //   process.env.NODE_ENV === "production"
-                  //     ? true
-                  //     : false,
                   expires: new Date(Date.now() + 900000),
                 })
                 .status(200)
@@ -92,7 +79,6 @@ router.post("/login", async function (req, res) {
               res.status(401).send("Password is incorrect");
             }
           } else {
-            //console.log('User Not Found',res)
             res.status(404).send("Email not registered");
           }
         }

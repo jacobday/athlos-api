@@ -5,7 +5,7 @@ const Payment = require("../models/Payment");
 
 router.post("/add", async function (req, res) {
   const salt = await bcrypt.genSalt(10);
-  //rsconsole.log(req.body)
+
   var paymentObject = {
     userEmail: req.body.userEmail,
     cardHolderName: req.body.cardHolderName,
@@ -24,13 +24,11 @@ router.post("/add", async function (req, res) {
     rewardPointsUsed: req.body.rewardPointsUsed,
   };
   try {
-    //console.log(googleUser)
     let pMethod = await Payment.findOne({
       email: paymentObject.userEmail,
     }).exec(async (err, payMethod) => {
       if (err) {
         console.log(err);
-        //googleUser =GoogleUser.create(googleUser).exec()
       } else {
         if (pMethod) {
           payMethod = await Payment.create(paymentObject);
@@ -61,6 +59,7 @@ router.post("/getpaymethod", async (req, res) => {
 
 router.put("/update/:id", async (req, res) => {
   const salt = await bcrypt.genSalt(10);
+
   try {
     Payment.findByIdAndUpdate(req.params.id, {
       userEmail: req.body.userEmail,

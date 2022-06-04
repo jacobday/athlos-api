@@ -16,5 +16,6 @@ const FacilitySchema = mongoose.Schema({
   latitude: { type: Number },
   longitude: { type: Number },
 });
+
 const Facility = mongoose.model("Facility", FacilitySchema, "facilities");
 module.exports = Facility;

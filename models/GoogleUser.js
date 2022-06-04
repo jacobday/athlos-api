@@ -9,5 +9,6 @@ const GoogleUserSchema = mongoose.Schema({
   profileType: String,
   userType: String,
 });
+
 const GoogleUser = mongoose.model("GoogleUsers", GoogleUserSchema, "users");
 module.exports = GoogleUser;
