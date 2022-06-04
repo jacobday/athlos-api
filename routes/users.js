@@ -40,58 +40,58 @@ router.post("/add", async function (req, res) {
 
 router.post("/login", async function (req, res) {
   try {
-    let user = await User.findOne({ email: req.body.loginData.email }).exec(
-      async (err, user) => {
-        if (err) {
-          console.log(err);
-        } else {
-          if (user) {
-            console.log("Found User\n");
+    let user = await User.findOne({
+      email: { $eq: req.body.loginData.email },
+    }).exec(async (err, user) => {
+      if (err) {
+        console.log(err);
+      } else {
+        if (user) {
+          console.log("Found User\n");
 
-            //Check Hashed Passwords
-            const validPassword = await bcrypt.compare(
-              req.body.loginData.password,
-              user.password
-            );
-            if (validPassword) {
-              let token = jwt.sign(
-                { email: user.email },
-                process.env.JWT_SECRET
-              );
+          //Check Hashed Passwords
+          const validPassword = await bcrypt.compare(
+            req.body.loginData.password,
+            user.password
+          );
 
-              console.log("User Login Successful");
-              res
-                .cookie("access_token", token, {
-                  httpOnly: true,
-                  expires: new Date(Date.now() + 900000),
-                })
-                .status(200)
-                .json({
-                  firstName: user.firstName,
-                  lastName: user.lastName,
-                  email: user.email,
-                  userType: user.userType,
-                  message: "Authentication Successful!",
-                });
-            } else {
-              console.log("Password Mismatch");
-              res.status(401).send("Password is incorrect");
-            }
+          if (validPassword) {
+            let token = jwt.sign({ email: user.email }, process.env.JWT_SECRET);
+
+            console.log("User Login Successful");
+
+            res
+              .cookie("access_token", token, {
+                httpOnly: true,
+                expires: new Date(Date.now() + 900000),
+              })
+              .status(200)
+              .json({
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                userType: user.userType,
+                message: "Authentication Successful!",
+              });
           } else {
-            res.status(404).send("Email not registered");
+            console.log("Password Mismatch");
+            res.status(401).send("Password is incorrect");
           }
+        } else {
+          res.status(404).send("Email not registered");
         }
       }
-    );
+    });
   } catch (err) {
     console.log(err);
   }
 });
+
 router.get("/logout", middleware.authorization, (req, res) => {
   return res
     .clearCookie("access_token")
     .status(200)
-    .json({ message: "Successfully logged out 😏 🍀" });
+    .json({ message: "Successfully logged out" });
 });
 
 module.exports = router;
