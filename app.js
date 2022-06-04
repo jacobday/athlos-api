@@ -20,11 +20,12 @@ connectDB();
 
 const app = express();
 
-var origin = "https://athlos-ui.herokuapp.com";
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
-  origin = "http://localhost:3001";
+var origin = "https://athlos.herokuapp.com";
+if(process.env.NODE_ENV === "development"){
+    app.use(morgan('dev'))
+    origin = "http://localhost:3001"   
 }
+
 console.log(origin);
 app.use(cors({ credentials: true, origin: true }));
 app.set("trust proxy", 1);
