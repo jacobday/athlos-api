@@ -52,7 +52,9 @@ router.post("/add", async function (req, res) {
   };
   try {
     let facility = await Facility.findOne({
-      "facilityLocation.place_id": manualFacility.facilityLocation.place_id,
+      "facilityLocation.place_id": {
+        $eq: manualFacility.facilityLocation.place_id,
+      },
     }).exec(async (err, facility) => {
       if (err) {
         console.log(err);

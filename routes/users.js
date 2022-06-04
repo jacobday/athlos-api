@@ -18,7 +18,7 @@ router.post("/add", async function (req, res) {
     userType: "Customer",
   };
   try {
-    let user = await User.findOne({ email: manualUser.email }).exec(
+    let user = await User.findOne({ email: { $eq: manualUser.email } }).exec(
       async (err, user) => {
         if (err) {
           console.log(err);
