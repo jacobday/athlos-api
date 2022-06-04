@@ -10,7 +10,8 @@
     "build": "npm install",
     "start": "NODE_ENV=production node app",
     "dev": "cross-env NODE_ENV=development nodemon app",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json,css,html,md}\""
   },
   "author": "",
   "license": "ISC",
@@ -30,7 +31,8 @@
     "mongoose": "^6.2.3",
     "morgan": "^1.10.0",
     "passport": "^0.5.2",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "prettier": "^2.6.2"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
