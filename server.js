@@ -1,6 +1,5 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const connectDB = require("./config/db");
 const morgan = require("morgan");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
@@ -16,9 +15,8 @@ dotenv.config({ path: ".env" });
 // Passport Configuration
 require("./config/passport")(passport);
 
-connectDB();
-
 const app = express();
+app.use(express.json());
 
 var origin = "https://athlos.herokuapp.com";
 if (process.env.NODE_ENV === "development") {
@@ -66,9 +64,4 @@ app.use("/promotion", require("./routes/promotion"));
 app.use("/payment", require("./routes/payment"));
 app.use("/chat", require("./routes/chat"));
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(
-  PORT,
-  console.log(`Server Running in ${process.env.NODE_ENV} mode on port ${PORT}`)
-);
+module.exports = app;
