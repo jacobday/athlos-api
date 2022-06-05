@@ -13,6 +13,7 @@ on:
 env:
   CI: false
   MONGO_URI: ${{ secrets.MONGO_URI }}
+  MONGO_TEST_URI: ${{ secrets.MONGO_TEST_URI }}
   GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
   GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
   JWT_SECRET: ${{ secrets.JWT_SECRET }}
