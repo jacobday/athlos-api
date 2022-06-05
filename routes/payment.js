@@ -25,7 +25,7 @@ router.post("/add", async function (req, res) {
   };
   try {
     let pMethod = await Payment.findOne({
-      email: paymentObject.userEmail,
+      email: { $eq: paymentObject.userEmail },
     }).exec(async (err, payMethod) => {
       if (err) {
         console.log(err);
@@ -48,7 +48,7 @@ router.post("/add", async function (req, res) {
 });
 
 router.post("/getpaymethod", async (req, res) => {
-  Payment.find({ userEmail: req.body.email })
+  Payment.find({ userEmail: { $eq: req.body.email } })
     .then((pMethods) => {
       res.status(200).json(pMethods);
     })
@@ -62,18 +62,18 @@ router.put("/update/:id", async (req, res) => {
 
   try {
     Payment.findByIdAndUpdate(req.params.id, {
-      userEmail: req.body.userEmail,
-      cardHolderName: req.body.cardHolderName,
-      cardNumber: req.body.cardNumber,
-      cvv: await bcrypt.hash(req.body.cvv, salt),
-      cardExpiry: req.body.cardExpiry,
+      userEmail: { $eq: req.body.userEmail },
+      cardHolderName: { $eq: req.body.cardHolderName },
+      cardNumber: { $eq: req.body.cardNumber },
+      cvv: await bcrypt.hash({ $eq: req.body.cvv }, salt),
+      cardExpiry: { $eq: req.body.cardExpiry },
       billingLocation: {
-        streetAddress: req.body.billingLocation.streetAddress,
-        streetAddress2: req.body.billingLocation.streetAddress2 || "",
-        city: req.body.billingLocation.city,
-        state: req.body.billingLocation.state,
-        country: req.body.billingLocation.country,
-        zipcode: req.body.billingLocation.zipcode,
+        streetAddress: { $eq: req.body.billingLocation.streetAddress },
+        streetAddress2: { $eq: req.body.billingLocation.streetAddress2 } || "",
+        city: { $eq: req.body.billingLocation.city },
+        state: { $eq: req.body.billingLocation.state },
+        country: { $eq: req.body.billingLocation.country },
+        zipcode: { $eq: req.body.billingLocation.zipcode },
       },
     })
       .then((response) => {

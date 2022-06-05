@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Booking = require("../models/Booking");
-const Facility = require("../models/Facility");
-
-
 
 router.post("/add", async (req, res) => {
   try {
@@ -56,7 +53,6 @@ router.post("/userbookings", async function (req, res) {
       console.log(err);
       res.status(404).send("Error while retrieving booking");
     });
-
 });
 
 router.put("/:id", async (req, res) => {

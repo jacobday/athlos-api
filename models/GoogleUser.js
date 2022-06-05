@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const GoogleUserSchema = mongoose.Schema({
   googleId: { type: String, required: true },
   firstName: { type: String, required: true },

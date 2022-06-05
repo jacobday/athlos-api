@@ -1,4 +1,4 @@
-![Athlos Banner](https://imgur.com/L6LjUZB.jpg)
+[![Athlos Banner](https://imgur.com/L6LjUZB.jpg)](https://athlos.herokuapp.com)
 
 <h2 align="center">Athlos Booking Management</h2>
 
@@ -24,7 +24,8 @@
   <div>
     <a href="#features">Features</a> •
     <a href="#customer-demo-v050">Customer Demo</a> •
-    <a href="#credits">Credits</a>
+    <a href="#credits">Credits</a> •
+    <a href="https://github.com/jacobday/athlos">Frontend Repository</a>
   </div>
 
 </div>

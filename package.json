@@ -1,7 +1,7 @@
 {
   "name": "api",
-  "version": "0.5.0",
-  "description": "api for athlos project",
+  "version": "0.5.1",
+  "description": "API for Athlos",
   "main": "index.js",
   "engines": {
     "node": "16.x"
@@ -10,7 +10,7 @@
     "build": "npm install",
     "start": "NODE_ENV=production node app",
     "dev": "cross-env NODE_ENV=development nodemon app",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
     "pretty": "prettier --write \"./**/*.{js,jsx,json,css,html,md}\""
   },
   "author": "",
@@ -23,6 +23,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-rate-limit": "^6.4.0",
     "express-session": "^1.17.2",
     "google-auth-library": "^7.14.0",
     "jsonwebtoken": "^8.5.1",
@@ -36,6 +37,8 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "nodemon": "^2.0.15"
+    "jest": "^28.1.0",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.3"
   }
 }
