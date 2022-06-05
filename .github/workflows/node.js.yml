@@ -21,6 +21,7 @@ env:
   APIKEY: ${{ secrets.APIKEY }}
   AGENTUID: ${{ secrets.AGENTUID }}
   CHAT_API_URL: ${{ secrets.CHAT_API_URL }}
+  SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
 
 jobs:
   build:
