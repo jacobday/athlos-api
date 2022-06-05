@@ -82,7 +82,7 @@ router.delete("/delete/:id", async (req, res) => {
       if (!facility) {
         return res.status(404).send("Facility ID Invalid");
       }
-      res.status(200).send("Facility Deleted");
+      res.status(204).send("Facility Deleted");
     })
     .catch((err) => {
       res.status(500).send(err);

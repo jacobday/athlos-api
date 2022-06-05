@@ -10,7 +10,7 @@
     "build": "npm install",
     "start": "NODE_ENV=production node app",
     "dev": "cross-env NODE_ENV=development nodemon app",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
     "pretty": "prettier --write \"./**/*.{js,jsx,json,css,html,md}\""
   },
   "author": "",
@@ -37,6 +37,8 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "nodemon": "^2.0.15"
+    "jest": "^28.1.0",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.3"
   }
 }
