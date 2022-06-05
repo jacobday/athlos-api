@@ -2,7 +2,11 @@ const app = require("../server");
 const mongoose = require("mongoose");
 const supertest = require("supertest");
 const Facility = require("../models/Facility");
-const { response } = require("../server");
+const dotenv = require("dotenv");
+// const { response } = require("../server");
+
+// Load Configurations
+dotenv.config({ path: ".env" });
 
 beforeEach((done) => {
   mongoose.connect(
