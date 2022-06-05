@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const supertest = require("supertest");
 const Facility = require("../models/Facility");
 const dotenv = require("dotenv");
-// const { response } = require("../server");
 
 // Load Configurations
 dotenv.config({ path: ".env" });
