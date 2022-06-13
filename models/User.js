@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
   profileType: { type: String, required: true, default: "Manual" },
   userType: { type: String, required: true, default: "Customer" },
   rewardPoints: { type: Number, default: 100 },
+  joinDate: { type: Date, default: Date.now },
 });
 
 const User = mongoose.model("Users", UserSchema, "users");

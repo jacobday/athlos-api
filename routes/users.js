@@ -5,15 +5,19 @@ const { default: mongoose } = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const middleware = require("../middleware");
+const { token } = require("morgan");
 
+// @route POST api/users/add
+// @desc Register user
+// @access Public
 router.post("/add", async function (req, res) {
   const salt = await bcrypt.genSalt(10);
   var manualUser = {
     userId: new mongoose.Types.ObjectId().toString(),
-    firstName: req.body.newUserData.firstName,
-    lastName: req.body.newUserData.lastName,
-    email: req.body.newUserData.email,
-    password: await bcrypt.hash(req.body.newUserData.password, salt),
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: await bcrypt.hash(req.body.password, salt),
     profileType: "Manual",
     userType: "Customer",
   };
@@ -38,10 +42,13 @@ router.post("/add", async function (req, res) {
   }
 });
 
+// @route POST api/users/login
+// @desc Login user and return JWT token
+// @access Public
 router.post("/login", async function (req, res) {
   try {
     let user = await User.findOne({
-      email: { $eq: req.body.loginData.email },
+      email: { $eq: req.body.email },
     }).exec(async (err, user) => {
       if (err) {
         console.log(err);
@@ -51,28 +58,36 @@ router.post("/login", async function (req, res) {
 
           //Check Hashed Passwords
           const validPassword = await bcrypt.compare(
-            req.body.loginData.password,
+            req.body.password,
             user.password
           );
 
           if (validPassword) {
-            let token = jwt.sign({ email: user.email }, process.env.JWT_SECRET);
+            const payload = {
+              id: user.id,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+              type: user.userType,
+              rewardPoints: user.rewardPoints,
+            };
+
+            // Sign Token
+            jwt.sign(
+              payload,
+              process.env.JWT_SECRET,
+              {
+                expiresIn: "7d",
+              },
+              (err, token) => {
+                res.json({
+                  success: true,
+                  token: "Bearer" + token,
+                });
+              }
+            );
 
             console.log("User Login Successful");
-
-            res
-              .cookie("access_token", token, {
-                httpOnly: true,
-                expires: new Date(Date.now() + 900000),
-              })
-              .status(200)
-              .json({
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                userType: user.userType,
-                message: "Authentication Successful!",
-              });
           } else {
             console.log("Password Mismatch");
             res.status(401).send("Password is incorrect");
@@ -85,13 +100,6 @@ router.post("/login", async function (req, res) {
   } catch (err) {
     console.log(err);
   }
-});
-
-router.get("/logout", middleware.authorization, (req, res) => {
-  return res
-    .clearCookie("access_token")
-    .status(200)
-    .json({ message: "Successfully logged out" });
 });
 
 module.exports = router;

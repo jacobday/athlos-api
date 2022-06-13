@@ -8,8 +8,8 @@
   },
   "scripts": {
     "build": "npm install",
-    "start": "NODE_ENV=production node app",
-    "dev": "cross-env NODE_ENV=development nodemon app",
+    "start": "NODE_ENV=production node index",
+    "dev": "cross-env NODE_ENV=development nodemon index",
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
     "pretty": "prettier --write \"./**/*.{js,jsx,json,css,html,md}\""
   },
