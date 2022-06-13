@@ -22,6 +22,7 @@ const BookingSchema = mongoose.Schema({
     max: 23,
   },
   totalAmount: { type: Number, required: true },
+  creationDate: { type: Date, default: Date.now },
 });
 
 const Booking = mongoose.model("bookings", BookingSchema);

@@ -8,7 +8,7 @@ router.post("/add", async (req, res) => {
       res.status(200).json({
         message: "Booking done",
       });
-      console.log("booking successful");
+      console.log("Booking successful");
     });
   } catch (err) {
     res.status(500).json(err);
@@ -60,7 +60,7 @@ router.put("/:id", async (req, res) => {
     const modify = await Booking.findById(req.params.id);
     if (modify.email === req.body.email) {
       await modify.updateOne({ $set: req.body });
-      res.status(200).json("booking has been updated");
+      res.status(200).json("Booking has been updated");
     } else {
       res.status(403).json("You cannot modify this booking");
     }

@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  image: { type: String, required: false },
   profileType: { type: String, required: true, default: "Manual" },
   userType: { type: String, required: true, default: "Customer" },
   rewardPoints: { type: Number, default: 100 },

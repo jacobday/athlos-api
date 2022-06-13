@@ -14,6 +14,7 @@ const PaymentSchema = mongoose.Schema({
     country: { type: String, required: true },
     zipcode: { type: Number, required: true },
   },
+  creationDate: { type: Date, default: Date.now },
 });
 
 const Payment = mongoose.model("Payment", PaymentSchema, "payment_methods");

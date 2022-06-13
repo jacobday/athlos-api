@@ -16,6 +16,7 @@ const FacilitySchema = mongoose.Schema({
   reservationPeriodEnd: { type: String, required: true },
   latitude: { type: Number },
   longitude: { type: Number },
+  creationDate: { type: Date, default: Date.now },
 });
 
 const Facility = mongoose.model("Facility", FacilitySchema, "facilities");
