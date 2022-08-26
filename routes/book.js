@@ -59,7 +59,7 @@ router.put("/:id", async (req, res) => {
   try {
     const modify = await Booking.findById(req.params.id);
     if (modify.email === req.body.email) {
-      await modify.updateOne({ $set: req.body });
+      await modify.updateOne({ $set: req.body.trim().escape() });
       res.status(200).json("Booking has been updated");
     } else {
       res.status(403).json("You cannot modify this booking");
