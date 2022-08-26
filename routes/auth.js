@@ -58,7 +58,7 @@ router.post("/google", (req, res) => {
                     profilePicture: user.image,
                     email: user.email,
                     userType: user.userType,
-                    message: "Authentication Successful!!!",
+                    message: "Authentication Successful",
                   });
               } else {
                 let token = jwt.sign(
@@ -82,7 +82,7 @@ router.post("/google", (req, res) => {
                     profilePicture: user.image,
                     email: user.email,
                     userType: "Customer",
-                    message: "Authentication Successful!!!",
+                    message: "Authentication Successful",
                   });
               }
             }
