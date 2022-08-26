@@ -34,14 +34,15 @@ router.post("/userinterests", async function (req, res) {
     });
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", [], async (req, res) => {
   try {
+    console.log(req.body);
     const modify = await Interests.findById(req.params.id);
     if (modify.email === req.body.email) {
-      await modify.updateOne({ $set: req.body });
+      await modify.updateOne({ $set: req.body.trim().escape() });
       res.status(200).json("Interests has been updated");
     } else {
-      res.status(403).json("You cannot modify this Interests");
+      res.status(403).json("You cannot modify this interest");
     }
   } catch (err) {
     res.status(500).json(err);

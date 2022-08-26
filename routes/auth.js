@@ -6,8 +6,8 @@ let jwt = require("jsonwebtoken");
 const GoogleUser = require("../models/GoogleUser");
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-//@desc Auth with Google
-//@route GET /auth/google
+// @desc Auth with Google
+// @route GET /auth/google
 router.get("/google", (req, res) => {
   passport.authenticate("google"),
     { failureRedirect: "/" },
@@ -58,7 +58,7 @@ router.post("/google", (req, res) => {
                     profilePicture: user.image,
                     email: user.email,
                     userType: user.userType,
-                    message: "Authentication Successful!!!",
+                    message: "Authentication Successful",
                   });
               } else {
                 let token = jwt.sign(
@@ -82,7 +82,7 @@ router.post("/google", (req, res) => {
                     profilePicture: user.image,
                     email: user.email,
                     userType: "Customer",
-                    message: "Authentication Successful!!!",
+                    message: "Authentication Successful",
                   });
               }
             }
