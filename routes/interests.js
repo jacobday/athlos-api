@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Interests = require("../models/Interests");
-const { check } = require("express-validator");
 
 router.post("/add", async (req, res) => {
   try {
