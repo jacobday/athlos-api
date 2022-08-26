@@ -42,7 +42,7 @@ const authorization = (req, res, next) => {
   }
 };
 
-// set up rate limiter: maximum of 20 requests per minute
+// Rate limiter: maximum of 20 requests per minute
 const RateLimit = require('express-rate-limit');
 const limiter = RateLimit({
   windowMs: 1*60*1000, // 1 minute

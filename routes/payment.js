@@ -34,7 +34,7 @@ router.post("/add", async function (req, res) {
           payMethod = await Payment.create(paymentObject);
           res.status(409).json({
             message:
-              "Credit card details already exist for the user..Adding a new one",
+              "Credit card details already exists for the user... Adding a new one",
           });
         } else {
           payMethod = await Payment.create(paymentObject);
